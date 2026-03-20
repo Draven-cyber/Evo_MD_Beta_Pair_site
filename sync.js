@@ -18,8 +18,8 @@ class GitSync {
     constructor() {
         this.isSyncing = false;
         this.token = process.env.GITHUB_TOKEN;
-        this.repo = "Evo_MD_Beta";
-        this.owner = "rithikaimansara";
+        this.repo = "Evo_MD_Beta_Pair_site";
+        this.owner = "Draven-cyber";
         this.repoUrl = `https://${this.token}@github.com/${this.owner}/${this.repo}.git`;
     }
 

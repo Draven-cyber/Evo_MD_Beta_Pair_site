@@ -18,9 +18,10 @@ import sessionRouter from "./getSession.js";
 dotenv.config();
 
 const app = express();
+app.set("trust proxy", 1);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 5000;
 
 // Create sessions folder
 const SESSION_FOLDER = process.env.SESSION_FOLDER || "./mega_sessions";

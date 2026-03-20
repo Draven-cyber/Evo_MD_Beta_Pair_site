@@ -34,7 +34,17 @@ class GitSync {
         }
 
         const git = simpleGit(__dirname);
-        await git.addRemote('origin', this.repoUrl);
+        try {
+            const remotes = await git.getRemotes(true);
+            const hasOrigin = remotes.some(r => r.name === 'origin');
+            if (!hasOrigin) {
+                await git.addRemote('origin', this.repoUrl);
+            } else {
+                await git.remote(['set-url', 'origin', this.repoUrl]);
+            }
+        } catch (e) {
+            console.log(chalk.yellow('Remote setup skipped:', e.message));
+        }
         
         cron.schedule('* * * * *', () => this.sync());
         console.log(chalk.green('✅ Auto-sync scheduled: Every minute'));
